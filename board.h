@@ -4,7 +4,7 @@
 
 #define DEAD 0 
 #define ALIVE !(DEAD)
-#define DEAD_CHAR  'o'
+#define DEAD_CHAR  ' '
 #define ALIVE_CHAR '+'
 #define PRINT printw
 #define PRINTCH addch
