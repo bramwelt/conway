@@ -1,0 +1,14 @@
+##############################
+# Conway's Game of Life in C #
+#      by Trevor Bramwell    #
+##############################
+
+Date: 04/25/2011
+Email: trevor.bramwell@gmail.com
+
+A simple implementation of Conway's
+Game of Life witten in C.
+
+In order to not have to worry about
+Terminal IO I decided to use/learn
+the ncurses library.
