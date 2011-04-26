@@ -1,0 +1,10 @@
+# Any binaries
+bin/
+*.out
+
+# Swap files
+*.swp
+*~
+
+# Objects and archives
+*.[oa]
