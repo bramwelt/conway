@@ -1,5 +1,4 @@
 # Any binaries
-bin/
 *.out
 
 # Swap files
