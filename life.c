@@ -6,25 +6,44 @@
 #include <stdlib.h>
 #include <ncurses.h>
 
+#define BOARD_SIZE 20
+
 int main(void) {
-    Board *b = newBoard(6); //initialize board
+    WINDOW *my_win;
+    int x, y;
+    int h, w;
+
+    Board *b;
     int ch,count;
 
     initscr(); //initialize window
     keypad(stdscr, TRUE);
     noecho(); // disable echoing of input
-    count=0;
 
+    /* Setup Window */
+    h = BOARD_SIZE+4;
+    w = (BOARD_SIZE*2)+2;
+    getmaxyx(stdscr, y, x);
+    my_win = newwin(h, w, (y-h)/2, (x-w)/2);
+
+    /* Setup Board */
+    b = newBoard(BOARD_SIZE);
+    count=0;
+    
     do {
-        erase();
-        printBoard(b);
-        PRINT(" Iter:%i", count);
+        werase(my_win);
+        box(my_win, 0, 0);
+        printBoard(b, my_win);
+        mvwprintw(my_win, h-2, 1, "Iter:%i", count);
         refresh();
+        wrefresh(my_win);
         updateCells(b);
         changeState(b);
         count++;
     } while((ch = getch()) != 'q');
     
+    deleteBoard(b);
+    delwin(my_win);
     endwin();
     return 0;
 }

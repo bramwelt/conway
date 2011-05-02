@@ -54,18 +54,22 @@ void deleteBoard(Board *board) {
 }
 
 /* Output the state of the boards characters */
-void printBoard(Board *board) {
+void printBoard(Board *board, WINDOW *win) {
     int i,j;
+    int x,y, initx, inity;
+    getyx(win, inity, initx);
+    y = inity+1;
     for(i = 0; i < board->size; i++) {
+        x = initx+1;
         for(j = 0; j < board->size; j++) {
             if(board->array[i][j].state & 1) {
-                PRINTCH(ALIVE_CHAR);
+                mvwaddch(win, y, x++, ALIVE_CHAR);
             } else { 
-                PRINTCH(DEAD_CHAR);
+                mvwaddch(win, y, x++, DEAD_CHAR);
             }
-            PRINTCH(' ');
+            mvwaddch(win, y, x++, ' ');
         }
-        PRINTCH('\n');
+        wmove(win, ++y, x);
     }
 }
 

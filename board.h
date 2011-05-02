@@ -1,4 +1,5 @@
 /* board.h : Game of Life Board template */
+#include <ncurses.h>
 #ifndef BOARD_H
 #define BOARD_H
 
@@ -6,8 +7,6 @@
 #define ALIVE !(DEAD)
 #define DEAD_CHAR  ' '
 #define ALIVE_CHAR '+'
-#define PRINT printw
-#define PRINTCH addch
 
 typedef struct Cell {
     int state;
@@ -28,7 +27,7 @@ void eachCell(Board *board, void (*each)(Board*, int, int));
 void changeState(Board *board);
 void updateCells(Board *board);
 
-void printBoard(Board *board);
+void printBoard(Board *board, WINDOW *win);
 void seedBoard(Board *board);
 void testState(Board *board);
 #endif
