@@ -8,6 +8,8 @@
 
 #define BOARD_SIZE 20
 
+void printMenu(void);
+
 int main(void) {
     WINDOW *my_win;
     int x, y;
@@ -29,6 +31,10 @@ int main(void) {
     /* Setup Board */
     b = newBoard(BOARD_SIZE);
     count=0;
+   
+    /* Print Command Menu */ 
+    refresh();
+    printMenu();
     
     do {
         werase(my_win);
@@ -46,4 +52,20 @@ int main(void) {
     delwin(my_win);
     endwin();
     return 0;
+}
+
+void printMenu(void) {
+    WINDOW *win;
+    int x, y;
+    int h, w;
+    
+    h = 8;
+    w = 20;
+    x = (COLS/2)+BOARD_SIZE+2;
+    y = (LINES - BOARD_SIZE)/2;
+
+    win = newwin(h, w, y-1, x);
+    mvwprintw(win, 0, 0, "COMMANDS");
+    mvwprintw(win, 1, 0, "  q: Quit");
+    wrefresh(win);
 }
