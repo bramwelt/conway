@@ -3,8 +3,11 @@
 #      by Trevor Bramwell    #
 ##############################
 
-Date: 04/25/2011
+Date: 05/04/2011
 Email: trevor.bramwell@gmail.com
+
+Dependencies:
+    libncurses-dev
 
 A simple implementation of Conway's
 Game of Life witten in C.
