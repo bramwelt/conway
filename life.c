@@ -2,13 +2,11 @@
 /* Author: Trevor Bramwell
    Date: 04/20/2011
    Version: 0.1 */
-#include "board.h"
 #include <stdlib.h>
 #include <ncurses.h>
 
-#define BOARD_SIZE 20
-
-void printMenu(void);
+#include "board.h"
+#include "life.h"
 
 int main(void) {
     WINDOW *my_win;
