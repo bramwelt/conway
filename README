@@ -1,13 +1,16 @@
 Conway's Game of Life
 =====================
 
-:Author: Trevor Bramwell <trevor.j.bramwell@gmail.com>
-
 The goal of this project is to implement Conway's Game of Life as a C
 program using the NCurses library.
 
 Building
 --------
 
-:Dependencies: libncurses-dev
+ :Dependencies: libncurses-dev
+
 A simple Makefile is provided to help compile the application.
+
+Run::
+
+  make
