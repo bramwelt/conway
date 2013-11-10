@@ -7,7 +7,7 @@ program using the NCurses library.
 Building
 --------
 
- :Dependencies: libncurses-dev
+:Dependencies: libncurses-dev
 
 A simple Makefile is provided to help compile the application.
 
