@@ -3,6 +3,7 @@
 
 # Swap files
 *.swp
+*.swo
 *~
 
 # Objects and archives
