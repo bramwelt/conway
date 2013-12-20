@@ -7,13 +7,10 @@
 
 #include "board.h"
 #include "board_itr.h"
+#include "life.h"
 
-#define BOARD_SIZE 20
-
-void printMenu(void);
-void printBoard(Board *board, WINDOW *win);
-
-int main(void) {
+int main(int argc, char *argv[])
+{
     WINDOW *my_win;
     int x, y;
     int h, w;
@@ -57,7 +54,8 @@ int main(void) {
     return 0;
 }
 
-void printMenu(void) {
+void printMenu(void)
+{
     WINDOW *win;
     int x, y;
     int h, w;
@@ -74,7 +72,8 @@ void printMenu(void) {
 }
 
 /* Output the state of the boards characters */
-void printBoard(Board *board, WINDOW *win) {
+void printBoard(Board *board, WINDOW *win)
+{
     BoardItr itr;
     Cell* cell;
     int x, y, initx, inity;

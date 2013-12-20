@@ -9,7 +9,8 @@
 
 /* Initialize the board means to allocate memory to the struct
      and set the initial state of characters. */
-void initBoard(Board *board, int size) {
+void initBoard(Board *board, int size)
+{
     int i;
     board->size = size;
     board->array = (Cell**) malloc(sizeof(Cell*) * size);
@@ -24,7 +25,8 @@ void initBoard(Board *board, int size) {
 
 /* New Board creates a new board, initializes it and
      returns. */
-Board* newBoard(int size) {
+Board* newBoard(int size)
+{
     Board* b = (Board *) malloc( sizeof(Board) );
     assert(b != 0);
 
@@ -34,7 +36,8 @@ Board* newBoard(int size) {
 
 /* Free board will free up the memory the board
      has taken control of and reset the size. */
-void freeBoard(Board *board){
+void freeBoard(Board *board)
+{
     int i;
     for(i = 0; i < board->size; i++) {
         if(board->array[i] != 0) {
@@ -49,13 +52,15 @@ void freeBoard(Board *board){
 
 /* Delete board will free up the board along with the
      memory the board itself takes up. */
-void deleteBoard(Board *board) {
+void deleteBoard(Board *board)
+{
     freeBoard(board);
     free(board);
 }
 
 /* Return the character representation of a cell */
-char cellStr(Cell* cell) {
+char cellStr(Cell* cell)
+{
     if (cell->state & ALIVE)
         return (char) ALIVE_CHAR;
     return (char) DEAD_CHAR;
@@ -64,7 +69,8 @@ char cellStr(Cell* cell) {
 
 /* Setup the board to randomly have either
      a cell be dead or alive. */
-void seedBoard(Board *board) {
+void seedBoard(Board *board)
+{
     int i, j, herp;
     srand(time(NULL));
     for(i = 0; i < board->size; i++) {
@@ -79,19 +85,11 @@ void seedBoard(Board *board) {
     } 
 }
 
-/* Check a given cell to see if it is alive or dead */
-int _cellIsAlive(Board *board, int i, int j) {
-    assert(board != 0);
-    assert(i >= 0 && i < board->size);
-    assert(j >= 0 && i < board->size);
-
-    return board->array[i][j].state == ALIVE;
-}
-
 /* Taking a board and a callback function,
      perform the callback function 'update' on 
      each cell of the board. */
-void eachCell(Board *board, void (*each)(Board*, int, int)) {
+void eachCell(Board *board, void (*each)(Board*, int, int))
+{
     int i, j;
     for(i = 0; i < board->size; i++) {
         for(j = 0; j < board->size; j++) {
@@ -100,7 +98,8 @@ void eachCell(Board *board, void (*each)(Board*, int, int)) {
     }   
 }
 
-void _changeState(Board *board, int i, int j) {
+void _changeState(Board *board, int i, int j)
+{
     Cell *tmp;
     tmp = &board->array[i][j];
 
@@ -108,7 +107,8 @@ void _changeState(Board *board, int i, int j) {
 }
 
 /* Change the state of the cell to next iteration */
-void changeState(Board *board) {
+void changeState(Board *board)
+{
     assert(board != 0);
     eachCell(board, _changeState);
 }
@@ -120,7 +120,8 @@ void changeState(Board *board) {
  * Dead Cells:
  *  A cell with exactly three neighboors comes to life. (friendly)
  */
-void _scanCells(Board *board, int i, int j) {
+void _scanCells(Board *board, int i, int j)
+{
     int k,l,count;
     Cell *tmp, *tmp_count;
 
@@ -155,7 +156,8 @@ void _scanCells(Board *board, int i, int j) {
     }
 }
 
-void updateCells(Board *board) {
+void updateCells(Board *board)
+{
     assert(board != 0);
     eachCell(board, _scanCells);
 }
