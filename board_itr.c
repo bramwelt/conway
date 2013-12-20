@@ -1,3 +1,6 @@
+/*
+ * Board Iterator
+ */
 #include "board.h"
 #include "board_itr.h"
 
@@ -6,26 +9,26 @@ BoardItr* initBoardItr(BoardItr* boardItr, Board *board)
     boardItr->board = board;
     boardItr->x = 0;
     boardItr->y = 0;
+    boardItr->line = 0;
     return boardItr;
 }
 
 int hasNext(BoardItr* itr)
 {
-    int size = itr->board->size;
-    return (itr->x != size) && (itr->y != size);
+    return ((itr->x < itr->board->size) && (itr->y < itr->board->size));
 }
 
 Cell* next(BoardItr* itr)
 {
-    Cell* n;
-    if (itr->x == itr->board->size) return NULL;
-        
-    n = &(itr->board->array[itr->x][itr->y]);
-    if (itr->y != itr->board->size) {
+    Cell* cell = &(itr->board->array[itr->x][itr->y]);
+
+    if (itr->y < (itr->board->size-1)) {
         ++(itr->y);
+        itr->line = 0;
     } else {
         ++(itr->x);
         itr->y = 0;
+        itr->line = 1;
     }
-    return n;
+    return cell;
 }

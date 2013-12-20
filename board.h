@@ -23,6 +23,7 @@ void freeBoard(Board *board);
 Board* newBoard(int size);
 void deleteBoard(Board *board);
 
+char cellStr(Cell* cell);
 void eachCell(Board *board, void (*each)(Board*, int, int));
 void changeState(Board *board);
 void updateCells(Board *board);

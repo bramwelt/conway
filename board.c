@@ -4,7 +4,9 @@
 #include <stdlib.h>
 #include <time.h>
 #include <ncurses.h>
+
 #include "board.h"
+#include "board_itr.h"
 
 /* Initialize the board means to allocate memory to the struct
      and set the initial state of characters. */
@@ -72,6 +74,28 @@ void printBoard(Board *board, WINDOW *win) {
         wmove(win, ++y, x);
     }
 }
+
+void printfBoard(Board* board) {
+    BoardItr itr;
+    Cell* c;
+
+    initBoardItr(&itr, board);
+
+    while(hasNext(&itr)) {
+        c = next(&itr);
+        printf("%c", cellStr(c));
+        if (itr.line)
+            printf("\n");
+    }
+    printf("done\n");
+}
+
+char cellStr(Cell* cell) {
+    if (cell->state & ALIVE)
+        return (char) ALIVE_CHAR;
+    return (char) DEAD_CHAR;
+}
+
 
 /* Setup the board to randomly have either
      a cell be dead or alive. */
