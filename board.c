@@ -64,11 +64,7 @@ void printBoard(Board *board, WINDOW *win) {
     for(i = 0; i < board->size; i++) {
         x = initx+1;
         for(j = 0; j < board->size; j++) {
-            if(board->array[i][j].state & ALIVE) {
-                mvwaddch(win, y, x++, ALIVE_CHAR);
-            } else { 
-                mvwaddch(win, y, x++, DEAD_CHAR);
-            }
+            mvwaddch(win, y, x++, cellStr(&board->array[i][j]));
             mvwaddch(win, y, x++, ' ');
         }
         wmove(win, ++y, x);
