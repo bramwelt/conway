@@ -29,6 +29,7 @@ void changeState(Board *board);
 void updateCells(Board *board);
 
 void printBoard(Board *board, WINDOW *win);
+void printfBoard(Board* board);
 void seedBoard(Board *board);
 void testState(Board *board);
 #endif
