@@ -9,7 +9,7 @@ BoardItr* initBoardItr(BoardItr* boardItr, Board *board)
     boardItr->board = board;
     boardItr->x = 0;
     boardItr->y = 0;
-    boardItr->line = 0;
+    boardItr->endrow = 0;
     return boardItr;
 }
 
@@ -24,11 +24,11 @@ Cell* next(BoardItr* itr)
 
     if (itr->y < (itr->board->size-1)) {
         ++(itr->y);
-        itr->line = 0;
+        itr->endrow = 0;
     } else {
         ++(itr->x);
         itr->y = 0;
-        itr->line = 1;
+        itr->endrow = 1;
     }
     return cell;
 }

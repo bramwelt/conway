@@ -84,7 +84,7 @@ void printfBoard(Board* board) {
     while(hasNext(&itr)) {
         c = next(&itr);
         printf("%c", cellStr(c));
-        if (itr.line)
+        if (itr.endrow)
             printf("\n");
     }
     printf("done\n");
