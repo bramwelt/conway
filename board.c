@@ -6,7 +6,6 @@
 #include <ncurses.h>
 
 #include "board.h"
-#include "board_itr.h"
 
 /* Initialize the board means to allocate memory to the struct
      and set the initial state of characters. */
@@ -55,37 +54,7 @@ void deleteBoard(Board *board) {
     free(board);
 }
 
-/* Output the state of the boards characters */
-void printBoard(Board *board, WINDOW *win) {
-    int i,j;
-    int x,y, initx, inity;
-    getyx(win, inity, initx);
-    y = inity+1;
-    for(i = 0; i < board->size; i++) {
-        x = initx+1;
-        for(j = 0; j < board->size; j++) {
-            mvwaddch(win, y, x++, cellStr(&board->array[i][j]));
-            mvwaddch(win, y, x++, ' ');
-        }
-        wmove(win, ++y, x);
-    }
-}
-
-void printfBoard(Board* board) {
-    BoardItr itr;
-    Cell* c;
-
-    initBoardItr(&itr, board);
-
-    while(hasNext(&itr)) {
-        c = next(&itr);
-        printf("%c", cellStr(c));
-        if (itr.endrow)
-            printf("\n");
-    }
-    printf("done\n");
-}
-
+/* Return the character representation of a cell */
 char cellStr(Cell* cell) {
     if (cell->state & ALIVE)
         return (char) ALIVE_CHAR;

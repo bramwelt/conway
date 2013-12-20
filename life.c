@@ -2,13 +2,16 @@
 /* Author: Trevor Bramwell
    Date: 04/20/2011
    Version: 0.1 */
-#include "board.h"
 #include <stdlib.h>
 #include <ncurses.h>
+
+#include "board.h"
+#include "board_itr.h"
 
 #define BOARD_SIZE 20
 
 void printMenu(void);
+void printBoard(Board *board, WINDOW *win);
 
 int main(void) {
     WINDOW *my_win;
@@ -68,4 +71,28 @@ void printMenu(void) {
     mvwprintw(win, 0, 0, "COMMANDS");
     mvwprintw(win, 1, 0, "  q: Quit");
     wrefresh(win);
+}
+
+/* Output the state of the boards characters */
+void printBoard(Board *board, WINDOW *win) {
+    BoardItr itr;
+    Cell* cell;
+    int x, y, initx, inity;
+
+    getyx(win, inity, initx);
+    y = inity+1;
+
+    initBoardItr(&itr, board);
+
+    while(hasNext(&itr)) {
+        if (itr.endrow)
+            x = initx+1;
+
+        cell = next(&itr);
+        mvwaddch(win, y, x++, cellStr(cell));
+        mvwaddch(win, y, x++, ' ');
+
+        if (itr.endrow)
+            wmove(win, ++y, x);
+    }
 }
